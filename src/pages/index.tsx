@@ -26,6 +26,7 @@ export default function Home({ data }: { data: Data }) {
     <>
       <Head>
         <title>Weekend - INC</title>
+        <meta name="This is take home test frontend developer"></meta>
       </Head>
       <Navbar />
       <Box
