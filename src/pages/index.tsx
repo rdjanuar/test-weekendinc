@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { GetStaticProps } from "next";
+import Head from "next/head";
 import Image from "next/image";
 
 import Hero from "~/assets/image/Hero.png";
@@ -23,6 +24,9 @@ import { http } from "~/lib";
 export default function Home({ data }: { data: Data }) {
   return (
     <>
+      <Head>
+        <title>Weekend - INC</title>
+      </Head>
       <Navbar />
       <Box
         as="main"
@@ -212,7 +216,7 @@ export default function Home({ data }: { data: Data }) {
       </Box>
 
       <Box bg="black" h="100%" position="relative">
-         <Caraousel testimonial={data.testimonial} />
+        <Caraousel testimonial={data.testimonial} />
 
         <Flex flexDirection="column" gap="67px">
           <VStack
