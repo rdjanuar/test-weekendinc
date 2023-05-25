@@ -92,7 +92,7 @@ export const useCaraousel = () => {
   const handlePrev = () => {
     if (!ref.current) return;
 
-    const prev = ref.current.scrollLeft - ref.current.offsetWidth - scrollLeft;
+    const prev = ref.current.scrollLeft - ref.current.offsetWidth;
     const controls = animate(x, prev, {
       type: "tween",
       ease: "easeOut",
