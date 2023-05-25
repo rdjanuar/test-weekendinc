@@ -3,19 +3,15 @@ import { useRef, useState } from "react";
 
 export const useCaraousel = () => {
   const ref = useRef<HTMLUListElement>(null);
-  const { scrollXProgress } = useScroll({ container: ref });
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
   const [trackMouse, setTrackMouse] = useState(false);
-  const [animationComplete, setAnimationComplete] = useState(true);
 
   const x = useMotionValue(0);
 
   const handleMouseMove = (e: React.PointerEvent<HTMLDivElement>) => {
     if (!ref.current) return;
     if (!trackMouse) return;
-
-    setAnimationComplete(false);
 
     const xVal = e.pageX - ref.current.offsetLeft;
     const walk = (xVal - startX) * 2; //scroll-fast
@@ -27,12 +23,6 @@ export const useCaraousel = () => {
       onUpdate: (val) => {
         if (!ref.current) return;
         ref.current.scrollLeft = val;
-      },
-      onComplete: () => {
-        setAnimationComplete(true);
-      },
-      onStop: () => {
-        setAnimationComplete(true);
       },
     });
     return controls.stop;
@@ -61,9 +51,7 @@ export const useCaraousel = () => {
   const handleScroll = () => {
     if (!ref.current) return;
 
-    if (animationComplete) {
-      x.set(ref.current.scrollLeft);
-    }
+    x.set(ref.current.scrollLeft);
   };
 
   const handleNext = () => {
@@ -78,12 +66,6 @@ export const useCaraousel = () => {
       onUpdate: (val) => {
         if (!ref.current) return;
         ref.current.scrollLeft = val;
-      },
-      onComplete: () => {
-        setAnimationComplete(true);
-      },
-      onStop: () => {
-        setAnimationComplete(true);
       },
     });
     return controls.stop;
@@ -101,18 +83,11 @@ export const useCaraousel = () => {
         if (!ref.current) return;
         ref.current.scrollLeft = val;
       },
-      onComplete: () => {
-        setAnimationComplete(true);
-      },
-      onStop: () => {
-        setAnimationComplete(true);
-      },
     });
     return controls.stop;
   };
 
   return {
-    scrollXProgress,
     ref,
     handleMouseDown,
     handleMouseUp,
